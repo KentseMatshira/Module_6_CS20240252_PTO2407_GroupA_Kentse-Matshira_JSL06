@@ -4,9 +4,35 @@ const menu = {
     MainCourses: ["Margherita Pizza", "Spaghetti Carbonara"],
     Desserts: ["Tiramisu", "Cheesecake"]
 };
+// Total and order list
+let total = 0;
+let order = [];
 
 // Function to display menu items by category
-function displayMenuItems(menu) {
+function displayMenuItems(menu) {  const menuContainer = document.getElementById('menu');
+
+    // Loop through each category in the menu
+    for (let category in menu) {
+        const categoryElement = document.createElement('h3');
+        categoryElement.textContent = category;
+
+        const itemsList = document.createElement('ul');
+   // Loop through the items in each category
+        menu[category].forEach(item => {
+            const itemElement = document.createElement('li');
+            itemElement.textContent = `${item.name} - R${item.price.toFixed(2)}`;
+
+            // Add item to the order on click
+            itemElement.addEventListener('click', () => addToOrder(item));
+
+            itemsList.appendChild(itemElement);
+        });
+
+        menuContainer.appendChild(categoryElement);
+        menuContainer.appendChild(itemsList);
+    }
+}
+
     // Get the menu container element from the HTML
 
     // Loop through each category and its items in the menu object
