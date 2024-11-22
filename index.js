@@ -32,6 +32,28 @@ function displayMenuItems(menu) {  const menuContainer = document.getElementById
         menuContainer.appendChild(itemsList);
     }
 }
+// Callback function for adding an item to the order
+function addToOrder(item) {
+    const orderItemsList = document.getElementById('order-items');
+    const orderTotalElement = document.getElementById('order-total');
+
+    // Create a list item for the order
+    const orderItemElement = document.createElement('li');
+    orderItemElement.textContent = `${item.name} - R${item.price.toFixed(2)}`;
+
+    // Add functionality to remove the item from the order
+    orderItemElement.addEventListener('click', () => removeFromOrder(orderItemElement, item));
+
+    // Append the list item to the order items list
+    orderItemsList.appendChild(orderItemElement);
+
+    // Add the item to the total
+    total += item.price;
+    order.push(item);
+
+    // Update the total display
+    orderTotalElement.textContent = total.toFixed(2);
+}
 
     // Get the menu container element from the HTML
 
